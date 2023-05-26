@@ -6,8 +6,10 @@
 Neovim의 plugin은 처음에는 Vim script로 만들어진 기존 plugin을 많이 사용했으나 Lua 지원이 정착되면서 현재는 Lua로 작성된 멋진 plugin들이 많아졌다.
 
 너무 많은 plugin들이 있기 때문에 고르기가 쉽지 않았다.
-https://github.com/rockerBOO/awesome-neovim 에 어느정도 추려진 목록이 있지만 그래도 많다.
+[awesome-neovim](https://github.com/rockerBOO/awesome-neovim)에 어느정도 추려진 목록이 있지만 그래도 많다.
 그래서 [LazyVim](https://github.com/LazyVim/LazyVim)에서 사용하는 plugin들과 설정을 참고해서 개인 설정을 만들기로 했다.
+
+Windows에서 GUI client를 사용하는 환경을 기준으로 한다. Neovim의 기본 GUI인 neovim-qt는 일부 plugin 동작이 제대로 되지 않았다. [Neovide](https://github.com/neovide/neovide)를 사용하기로 한다.
 
 ## Configuration Layout
 LazyVim과 같이 많은 plugin과 custom설정을 관리하는 경우 여러 파일과 폴더로 config 파일을 구분하고 있다.
