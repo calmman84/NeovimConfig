@@ -7,6 +7,8 @@ vim.keymap.set({'n', 'x'}, '<C-Insert>', '"+y')
 vim.keymap.set({'n', 'v', 'o'}, '<S-Insert>', '"+p')
 -- Paste from clipboard and no auto-indent (Insert and Command-line mode)
 vim.keymap.set('!', '<S-Insert>', '<C-R><C-O>+')
+-- Space as leader key
+vim.g.mapleader = ' '
 
 ----------------------------------------
 -- Plugins
@@ -27,14 +29,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   -- Colorscheme
-  {
-    "EdenEast/nightfox.nvim",
-    config = function()
-      -- load the colorscheme here
-      --vim.cmd.colorscheme("nightfox")
-      vim.cmd.colorscheme("dayfox")
-    end,
-  },
+  { "folke/tokyonight.nvim" },
+  { "EdenEast/nightfox.nvim" },
   -- Statusline
   {
     "nvim-lualine/lualine.nvim",
@@ -71,6 +67,15 @@ require("lazy").setup({
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
+    keys = {
+      { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
+      { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+      -- find
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+    }
   },
   -- Keybinding
   {
@@ -83,3 +88,10 @@ require("lazy").setup({
   },
 })
 
+-- Select Colorscheme
+vim.cmd.colorscheme("tokyonight")
+--vim.cmd.colorscheme("tokyonight-day")
+--vim.cmd.colorscheme("tokyonight-night")
+--vim.cmd.colorscheme("tokyonight-moon")
+--vim.cmd.colorscheme("nightfox")
+--vim.cmd.colorscheme("dayfox")

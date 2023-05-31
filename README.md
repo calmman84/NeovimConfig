@@ -20,3 +20,29 @@ LazyVim과 같이 많은 plugin과 custom설정을 관리하는 경우 여러 �
 기존에는 [vim-plug](https://github.com/junegunn/vim-plug)를 사용했지만 되도록Lua로 작성된 plugin들로
 모두 바꿀 생각이므로 plugin manager도 Lua로 만들어진 것을 사용하기로 한다.
 [savq/paq-nvim](https://github.com/savq/paq-nvim)이 별이 더 많지만 참고 대상인 LazyVim에서 lazy.nvim을 사용하고 있기 때문에 [folke/lazy.nvim](https://github.com/folke/lazy.nvim)으로 선택했다.
+
+### Colorscheme
+[folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)이 LazyVim의 기본 테마로 현재 awesome-nvim에서 가장 인기있는 colorscheme이다.
+개인적으로 light 테마는 [EdenEast/nightfox.nvim](https://github.com/EdenEast/nightfox.nvim)의 dayfox가 더 마음에 들어 tokyonight 와 함께 설치해서 바꿔가며 써보고 있다.
+
+### Statusline
+LazyVim에서 사용하고 있고 하단의 Statusline을 꾸미는 plugin 중 awesome-neovim에서 가장 인기 있는 [nvim-lualine/lualine.nvim](https://github.com/nvim-lualine/lualine.nvim)을 선택했다.
+
+### Tabline
+LazyVim에서 사용하고 있고 상단의 Tabline을 위한 plugin 중 awesome-neovim에서 가장 인기 있는 [akinsho/bufferline.nvim](https://github.com/akinsho/bufferline.nvim)을 선택했다.
+
+### File Explorer
+LazyVim에서 사용하고 있는 File Explorer인 [nvim-neo-tree/neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim)를 선택했다.
+
+### Fuzzy Finder
+LazyVim에서 사용하고 있는 Fuzzy Finder인 [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)를 선택했다.
+
+### misc
+[nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): 아이콘 표시를 위해 설치. lualine, bufferline, neo-tree에서 사용.
+[famiu/bufdelete.nvim](https://github.com/famiu/bufdelete.nvim): 버퍼를 닫았을 때 window layout이 망가지는 것을 방지. bufferline과 연동해서 사용.
+[nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim): neo-tree, telescope에서 사용
+
+### Other Dependency
+[ripgrep](https://github.com/BurntSushi/ripgrep): telescope에서 빠른 검색을 위해 사용
+[fd](https://github.com/sharkdp/fd): telescope에서 빠른 검색을 위해 사용
+Meslo: Nerd font
