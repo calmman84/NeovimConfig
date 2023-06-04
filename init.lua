@@ -7,7 +7,7 @@ vim.keymap.set({'n', 'x'}, '<C-Insert>', '"+y')
 vim.keymap.set({'n', 'v', 'o'}, '<S-Insert>', '"+p')
 -- Paste from clipboard and no auto-indent (Insert and Command-line mode)
 vim.keymap.set('!', '<S-Insert>', '<C-R><C-O>+')
--- Space as leader key
+-- Space as <Leader> key
 vim.g.mapleader = ' '
 
 ----------------------------------------
@@ -36,7 +36,7 @@ require("lazy").setup({
     "nvim-lualine/lualine.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("lualine").setup()
+      require("lualine").setup({ extensions = { "neo-tree" } })
     end,
   },
   -- Tabline
@@ -51,6 +51,13 @@ require("lazy").setup({
 	numbers = "buffer_id",
         close_command = function(n) require("bufdelete").bufdelete(n, false) end,
         right_mouse_command = function(n) require("bufdelete").bufdelete(n, false) end,
+        offsets = {
+	  {
+            filetype = "neo-tree",
+            text = "File Explorer",
+            highlight = "Directory",
+	  },
+        },
       },
     },
   },
@@ -62,6 +69,9 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
+    keys = {
+      { "<leader>e", "<cmd>Neotree reveal<cr>", desc = "Neo-tree(File Explorer)" },
+    },
   },
   -- Fuzzy Finder
   {
@@ -70,11 +80,9 @@ require("lazy").setup({
     keys = {
       { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
       { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-      -- find
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+      { "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
+      { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
     }
   },
   -- Keybinding
