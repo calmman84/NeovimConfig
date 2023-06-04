@@ -1,4 +1,16 @@
 ----------------------------------------
+-- Editor Settings
+----------------------------------------
+vim.opt.ignorecase = true  -- ignore Case sensitive when searching
+vim.opt.title = true       -- change the terminal title
+
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+-- Prevent '#symbol'(e.g. #if) reindenting of the current line when typed in Insert mode (remove '0#' from default)
+vim.opt.cinkeys = "0{,0},0),0],:,!^F,o,O,e"
+
+----------------------------------------
 -- Keybindings
 ----------------------------------------
 -- Copy to clipboard 
