@@ -60,15 +60,15 @@ require("lazy").setup({
     },
     opts = {
       options = {
-	numbers = "buffer_id",
+        numbers = "buffer_id",
         close_command = function(n) require("bufdelete").bufdelete(n, false) end,
         right_mouse_command = function(n) require("bufdelete").bufdelete(n, false) end,
         offsets = {
-	  {
+          {
             filetype = "neo-tree",
             text = "File Explorer",
             highlight = "Directory",
-	  },
+          },
         },
       },
     },
@@ -104,6 +104,13 @@ require("lazy").setup({
       vim.o.timeout = true
       vim.o.timeoutlen = 300
       require("which-key").setup()
+    end,
+  },
+  -- Editing Support
+  {
+    "ethanholz/nvim-lastplace",
+    config = function()
+      require("nvim-lastplace").setup()
     end,
   },
 })

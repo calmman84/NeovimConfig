@@ -37,10 +37,15 @@ LazyVim에서 사용하고 있는 File Explorer인 [nvim-neo-tree/neo-tree.nvim]
 ### Fuzzy Finder
 LazyVim에서 사용하고 있는 Fuzzy Finder인 [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)를 선택했다.
 
+### Editing Support
+LazyVim에서는 session management나 project management plugin도 사용하지만 나는 그 정도는 필요없고 파일을 다시 열었을 때 마지막 cursor position에서 다시 시작하게 해 주는 기능 정도만 필요하다.
+그래서 [nvim-lastplace](https://github.com/ethanholz/nvim-lastplace)를 추가했다.
+
 ### misc
 [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): 아이콘 표시를 위해 설치. lualine, bufferline, neo-tree에서 사용.
 [famiu/bufdelete.nvim](https://github.com/famiu/bufdelete.nvim): 버퍼를 닫았을 때 window layout이 망가지는 것을 방지. bufferline과 연동해서 사용.
 [nvim-lua/plenary.nvim](https://github.com/nvim-lua/plenary.nvim): neo-tree, telescope에서 사용
+[MunifTanjim/nui.nvim](https://github.com/MunifTanjim/nui.nvim): neo-tree에서 사용
 
 ### Other Dependency
 [ripgrep](https://github.com/BurntSushi/ripgrep): telescope에서 빠른 검색을 위해 사용
