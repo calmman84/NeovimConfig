@@ -41,6 +41,12 @@ LazyVim에서 사용하고 있는 Fuzzy Finder인 [nvim-telescope/telescope.nvim
 LazyVim에서는 session management나 project management plugin도 사용하지만 나는 그 정도는 필요없고 파일을 다시 열었을 때 마지막 cursor position에서 다시 시작하게 해 주는 기능 정도만 필요하다.
 그래서 [nvim-lastplace](https://github.com/ethanholz/nvim-lastplace)를 추가했다.
 
+GVim을 버리고 Neovim으로 바꾸지 못했던 이유 중 하나는 한글 입력 중 ESC를 누르면 Normal 모드가 되면서 자동으로 입력 언어를 영어로 바꿔주는 기능이 있었기 때문이다.
+[keaising/im-select.nvim](https://github.com/keaising/im-select.nvim) plugin이 Neovim에서도 이를 가능하게 해주기 때문에 추가로 설치했다.
+
+**Remark:** input method를 바꾸는 방식이기 때문에 영어 입력이 따로 설치되어 있어야 한다. 한글 윈도우에서는 기본으로 '한국어'만 설치되어 있는데 윈도우즈의 "설정 > 시간 및 언어 > 언어 및 지역"에 '영어(미국)'를 추가로 설치해야 한다.
+![Remark im-select](./remark_im_select.png)
+
 ### misc
 [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): 아이콘 표시를 위해 설치. lualine, bufferline, neo-tree에서 사용.
 [famiu/bufdelete.nvim](https://github.com/famiu/bufdelete.nvim): 버퍼를 닫았을 때 window layout이 망가지는 것을 방지. bufferline과 연동해서 사용.
@@ -50,4 +56,5 @@ LazyVim에서는 session management나 project management plugin도 사용하지
 ### Other Dependency
 [ripgrep](https://github.com/BurntSushi/ripgrep): telescope에서 빠른 검색을 위해 사용
 [fd](https://github.com/sharkdp/fd): telescope에서 빠른 검색을 위해 사용
+[daipeihust/im-select](https://github.com/daipeihust/im-select): 한/영 자동변환을 위해 사용. im-select.nvim에서 사용.
 Meslo: Nerd font
