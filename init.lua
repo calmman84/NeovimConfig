@@ -9,6 +9,8 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 -- Prevent '#symbol'(e.g. #if) reindenting of the current line when typed in Insert mode (remove '0#' from default)
 vim.opt.cinkeys = "0{,0},0),0],:,!^F,o,O,e"
+--vim.opt.guifont = "MesloLGM Nerd Font Mono:h14"
+--vim.opt.guifont = "D2Coding Nerd Font:h14"
 
 ----------------------------------------
 -- Keybindings
