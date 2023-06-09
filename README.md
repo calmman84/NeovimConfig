@@ -11,7 +11,15 @@ Neovim의 plugin은 처음에는 Vim script로 만들어진 기존 plugin을 많
 [awesome-neovim](https://github.com/rockerBOO/awesome-neovim)에 어느정도 추려진 목록이 있지만 그래도 많다.
 그래서 [LazyVim](https://github.com/LazyVim/LazyVim)에서 사용하는 plugin들과 설정을 참고해서 개인 설정을 만들기로 했다.
 
-Windows에서 GUI client를 사용하는 환경을 기준으로 한다. Neovim의 기본 GUI인 neovim-qt가 일부 글꼴 문제가 있어 [Neovide](https://github.com/neovide/neovide)를 사용하기로 한다.
+Windows에서 GUI client를 사용하는 환경을 기준으로 한다.  
+Neovim의 기본 GUI인 neovim-qt가 일부 글꼴 문제가 있어 [Neovide](https://github.com/neovide/neovide)를 사용하기로 한다.  
+=> Neovide의 버그 때문에 다른 대체제를 찾아보았고 결국은 Neovim Qt의 설정 문제를 찾아 수정하고 사용하기로 했다.(https://github.com/folke/lazy.nvim/issues/584)
+
+[발견한 Neovim GUI client 문제들]
+* 공통: 한글입력이 매끄럽지 않다. 한글 입력창 문제.
+* neoary: 전체적으로 글자가 흐리게 보인다.
+* fvim: totalcmd, eclipse 등 윈도우 탐색기 외의 프로그램에서 파일을 drag and drop으로 열 수 없다.
+* Neovide: 시작할 때 창 크기가 닫았을 때 보다 커진다. https://github.com/neovide/neovide/issues/1400
 
 ## Configuration Layout
 LazyVim과 같이 많은 plugin과 custom설정을 관리하는 경우 여러 파일과 폴더로 config 파일을 구분하고 있다.
