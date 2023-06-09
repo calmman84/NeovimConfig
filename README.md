@@ -21,7 +21,7 @@ LazyVim과 같이 많은 plugin과 custom설정을 관리하는 경우 여러 �
 ### Plugin Manager
 기존에는 [vim-plug](https://github.com/junegunn/vim-plug)를 사용했지만 되도록Lua로 작성된 plugin들로
 모두 바꿀 생각이므로 plugin manager도 Lua로 만들어진 것을 사용하기로 한다.
-[savq/paq-nvim](https://github.com/savq/paq-nvim)이 별이 더 많지만 참고 대상인 LazyVim에서 lazy.nvim을 사용하고 있기 때문에 [folke/lazy.nvim](https://github.com/folke/lazy.nvim)으로 선택했다.
+[wbthomason/packer.nvim](https://github.com/wbthomason/packer.nvim)이 별이 더 많지만 참고 대상인 LazyVim에서 lazy.nvim을 사용하고 있기 때문에 [folke/lazy.nvim](https://github.com/folke/lazy.nvim)으로 선택했다.
 
 ### Colorscheme
 [folke/tokyonight.nvim](https://github.com/folke/tokyonight.nvim)이 LazyVim의 기본 테마로 현재 awesome-nvim에서 가장 인기있는 colorscheme이다.
