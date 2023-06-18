@@ -7,9 +7,11 @@ vim.opt.title = true       -- change the terminal title
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
+-- Remove latin1 and add cp949 to fencs for Korean
+vim.opt.fileencodings = "ucs-bom,utf-8,default,cp949"
 -- Prevent '#symbol'(e.g. #if) reindenting of the current line when typed in Insert mode (remove '0#' from default)
 vim.opt.cinkeys = "0{,0},0),0],:,!^F,o,O,e"
-vim.opt.guifont = "MesloLGM Nerd Font Mono:h12"
+vim.opt.guifont = "Inconsolata Nerd Font Mono:12"
 vim.opt.guifontwide = "D2Coding:h12"
 
 ----------------------------------------
