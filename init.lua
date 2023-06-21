@@ -121,16 +121,6 @@ require("lazy").setup(
         require("nvim-lastplace").setup()
       end,
     },
-    -- Switch Input Method automatically depends on NeoVim's edit mode
-    {
-      "keaising/im-select.nvim",
-      config = function()
-        require("im_select").setup({
-          set_default_events = { "InsertLeave" },
-          set_previous_events = { "InsertEnter", "FocusLost", "CmdlineEnter" },
-        })
-      end,
-    },
   },
   -- opts for Neovim Qt
   { performance = { rtp = { reset = false }, }, }
