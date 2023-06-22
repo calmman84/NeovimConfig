@@ -13,6 +13,13 @@ vim.opt.fileencodings = "ucs-bom,utf-8,default,cp949"
 vim.opt.cinkeys = "0{,0},0),0],:,!^F,o,O,e"
 vim.opt.guifont = "Inconsolata Nerd Font Mono:12"
 vim.opt.guifontwide = "D2Coding:h12"
+-- Warning reload files when modified externally
+-- See https://neovim.discourse.group/t/a-lua-based-auto-refresh-buffers-when-they-change-on-disk-function/2482/2
+vim.opt.autoread = false
+vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGained" }, {
+  pattern = { "*" },
+  command = "checktime",
+})
 
 ----------------------------------------
 -- Keybindings
