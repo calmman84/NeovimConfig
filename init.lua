@@ -11,7 +11,7 @@ vim.opt.expandtab = true
 vim.opt.fileencodings = "ucs-bom,utf-8,default,cp949"
 -- Prevent '#symbol'(e.g. #if) reindenting of the current line when typed in Insert mode (remove '0#' from default)
 vim.opt.cinkeys = "0{,0},0),0],:,!^F,o,O,e"
-vim.opt.guifont = "Inconsolata Nerd Font Mono:12"
+vim.opt.guifont = "Inconsolata Nerd Font Mono:h12"
 vim.opt.guifontwide = "D2Coding:h12"
 -- Warning reload files when modified externally
 -- See https://neovim.discourse.group/t/a-lua-based-auto-refresh-buffers-when-they-change-on-disk-function/2482/2
@@ -96,7 +96,7 @@ require("lazy").setup(
         "MunifTanjim/nui.nvim",
       },
       keys = {
-        { "<leader>e", "<cmd>Neotree reveal<cr>", desc = "Neo-tree(File Explorer)" },
+        { "<leader>e", "<cmd>Neotree reveal_force_cwd<cr>", desc = "Neo-tree(File Explorer)" },
       },
     },
     -- Fuzzy Finder
@@ -126,6 +126,15 @@ require("lazy").setup(
       "ethanholz/nvim-lastplace",
       config = function()
         require("nvim-lastplace").setup()
+      end,
+    },
+    -- Syntax
+    { 
+      'nvim-treesitter/nvim-treesitter',
+      config = function()
+        require("nvim-treesitter.configs").setup({
+          highlight = { enable = true },
+        })
       end,
     },
   },
