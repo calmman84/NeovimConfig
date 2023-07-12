@@ -1,6 +1,6 @@
 # Personal Neovim Configuration
 
-![Neovide screenshot](./neovim_screen.png)
+![Neovim screenshot](./neovim_screen.png)
 
 ## Background
 처음에는 Neovim을 단순히 Vim의 대체품 정도로 생각했고 Windows 환경에서는 기본 GUI client가 부실해서 사용하지 않았다.
@@ -55,7 +55,10 @@ GVim을 버리고 Neovim으로 바꾸지 못했던 이유 중 하나는 한글 �
 [keaising/im-select.nvim](https://github.com/keaising/im-select.nvim) plugin이 Neovim에서도 이를 가능하게 해준다. 그러나 input method를 바꾸는 방식이기 때문에 영어 입력이 따로 설치되어 있어야 한다. 한글 윈도우에서는 기본으로 '한국어'만 설치되어 있는데 윈도우즈의 "설정 > 시간 및 언어 > 언어 및 지역"에 '영어(미국)'를 추가로 설치해야 한다.
 im-select.nvim으로도 완벽하지는 않고 불편한 경우가 있었다. 그래서 결국은 다른 한글 입력기를 사용하기로 했다.
 '날개셋 한글 입력기'에서 아래와 같이 단축글쇠에 ESC를 누르면 영문 입력 모드로 전환하도록 설정을 추가한다.
+
 ![Hotkey to switch ENG](./remark_im_select.png)
+
+추가적인 syntax highlighting을 위해 [nvim-treesitter/nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter)를 추가했다.
 
 ### misc
 - [nvim-tree/nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): 아이콘 표시를 위해 설치. lualine, bufferline, neo-tree에서 사용.
@@ -68,3 +71,10 @@ im-select.nvim으로도 완벽하지는 않고 불편한 경우가 있었다. �
 - [fd](https://github.com/sharkdp/fd): telescope에서 빠른 검색을 위해 사용
 - [날개셋 한글 입력기](http://moogi.new21.org/prg4.html): ESC 키를 누르면 영문 입력 모드로 전환
 - [Inconsolata Nerd Font](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Inconsolata): Plugin에서 아이콘 표시를 위한 Inconsolata 기반의 Nerd Font(icon, 그림 형태가 패치된 글꼴)
+
+## LSP
+
+https://dx13.co.uk/articles/2023/04/24/neovim-lsp-without-plugins/ 를 참고하여 C 언어를 위한 설정을 plugin 없이 추가했다.
+
+clangd(Language Server for C/C++) 설치
+- LLVM Clang for Windows: https://github.com/llvm/llvm-project/releases LLVM-x.x.x-win64.exe

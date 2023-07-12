@@ -34,6 +34,23 @@ vim.keymap.set('!', '<S-Insert>', '<C-R><C-O>+')
 vim.g.mapleader = ' '
 
 ----------------------------------------
+-- LSP
+----------------------------------------
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "c", "cpp" },
+  callback = function()
+    local client = vim.lsp.start({
+      name = "clangd",
+      cmd = { "clangd" },
+      root_dir = vim.fs.dirname(
+        vim.fs.find({ ".cproject", ".svn", ".git" }, { upward = true })[1]
+      )
+    })
+    vim.lsp.buf_attach_client(0, client)
+  end
+})
+
+----------------------------------------
 -- Plugins
 ----------------------------------------
 -- Install Plugin manager
