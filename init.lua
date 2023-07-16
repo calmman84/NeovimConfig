@@ -24,14 +24,16 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
 ----------------------------------------
 -- Keybindings
 ----------------------------------------
+-- Space as <Leader> key
+vim.g.mapleader = ' '
 -- Copy to clipboard 
 vim.keymap.set({'n', 'x'}, '<C-Insert>', '"+y')
 -- Paste from clipboard (Normal, Visual, Select and Operator-pending mode)
 vim.keymap.set({'n', 'v', 'o'}, '<S-Insert>', '"+p')
 -- Paste from clipboard and no auto-indent (Insert and Command-line mode)
 vim.keymap.set('!', '<S-Insert>', '<C-R><C-O>+')
--- Space as <Leader> key
-vim.g.mapleader = ' '
+-- Remap 'Ctrl + h' to telescope.nvim 'find in files' menu
+vim.keymap.set({'n', 'v', 'i'}, '<C-h>', '<leader>fg', { remap = true })
 
 ----------------------------------------
 -- LSP
@@ -39,16 +41,47 @@ vim.g.mapleader = ' '
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "c", "cpp" },
   callback = function()
+    local root = vim.fs.dirname(
+      vim.fs.find({ ".cproject", ".svn", ".git" }, {
+        upward = true,
+        path = vim.fs.dirname(vim.api.nvim_buf_get_name(0)),
+      })[1]
+    )
     local client = vim.lsp.start({
       name = "clangd",
       cmd = { "clangd" },
-      root_dir = vim.fs.dirname(
-        vim.fs.find({ ".cproject", ".svn", ".git" }, { upward = true })[1]
-      )
+      root_dir = root
     })
     vim.lsp.buf_attach_client(0, client)
+    vim.keymap.set("n", "<leader>gd", "<cmd>lua vim.lsp.buf.definition()<cr>", { desc = "Goto Definition" })
+    vim.keymap.set("n", "<leader>gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", { desc = "Goto Declaration" })
+    vim.keymap.set("n", "<leader>gr", "<cmd>lua vim.lsp.buf.references()<cr>", { desc = "Show Reference List" })
+    create_compile_flags(root)
   end
 })
+
+-- Create include directory information for clangd
+function create_compile_flags(root_dir)
+  -- root_dir exists and compile_flags.txt is not exists
+  if root_dir and (vim.fn.filereadable(root_dir .. "/compile_flags.txt") == 0) then
+    -- Get all '.h' file list
+    local headers = vim.fs.find(function(name)
+      return name:match('.*%.h$')
+    end, {limit = math.huge, type = 'file', path = root_dir})
+    -- Create a set of header directory for removing duplicated directory
+    local header_dirs = {}
+    for _, header in ipairs(headers) do
+      header_dirs[vim.fs.dirname(header)] = true
+    end
+    -- Create a include path list
+    local include_path = {}
+    for k, _ in pairs(header_dirs) do
+      table.insert(include_path, "-I")
+      table.insert(include_path, k)
+    end
+    vim.fn.writefile(include_path, root_dir .. "/compile_flags.txt")
+  end
+end
 
 ----------------------------------------
 -- Plugins
@@ -123,9 +156,9 @@ require("lazy").setup(
       keys = {
         { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
         { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-        { "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
-        { "<leader>f", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-        { "<leader>r", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
+        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
+        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+        { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
       }
     },
     -- Keybinding
@@ -134,7 +167,12 @@ require("lazy").setup(
       config = function()
         vim.o.timeout = true
         vim.o.timeoutlen = 300
-        require("which-key").setup()
+        local wk = require("which-key")
+        wk.setup()
+        wk.register({
+          ["<leader>f"] = { name = "+file/find" },
+          ["<leader>g"] = { name = "+LSP menu" },
+        })
       end,
     },
     -- Editing Support
@@ -152,6 +190,13 @@ require("lazy").setup(
         require("nvim-treesitter.configs").setup({
           highlight = { enable = true },
         })
+      end,
+    },
+    -- LSP
+    {
+      'simrat39/symbols-outline.nvim',
+      config = function()
+        require("symbols-outline").setup()
       end,
     },
   },

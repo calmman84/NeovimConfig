@@ -78,3 +78,5 @@ https://dx13.co.uk/articles/2023/04/24/neovim-lsp-without-plugins/ 를 참고하
 
 clangd(Language Server for C/C++) 설치
 - LLVM Clang for Windows: https://github.com/llvm/llvm-project/releases LLVM-x.x.x-win64.exe
+
+symbol을 sidebar로 보여주는 [simrat39/symbols-outline.nvim](https://github.com/simrat39/symbols-outline.nvim) 설치
