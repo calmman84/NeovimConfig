@@ -47,6 +47,10 @@ LazyVim에서 사용하고 있는 File Explorer인 [nvim-neo-tree/neo-tree.nvim]
 ### Fuzzy Finder
 LazyVim에서 사용하고 있는 Fuzzy Finder인 [nvim-telescope/telescope.nvim](https://github.com/nvim-telescope/telescope.nvim)를 선택했다.
 
+### Keybinding
+LazyVim에서 사용하고 있고 keybinding plugin 중 awesome-neovim에서 가장 인기 있는 [folke/which-key.nvim](https://github.com/folke/which-key.nvim)를 선택했다.  
+여러 키의 조합으로 구성되었거나 자주 쓰지 않아 잘 외워지지 않는 단축키를 편하게 보면서 쓸 수 있게 해 주는 plugin이다.
+
 ### Editing Support
 LazyVim에서는 session management나 project management plugin도 사용하지만 나는 그 정도는 필요없고 파일을 다시 열었을 때 마지막 cursor position에서 다시 시작하게 해 주는 기능 정도만 필요하다.
 그래서 [nvim-lastplace](https://github.com/ethanholz/nvim-lastplace)를 추가했다.
