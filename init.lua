@@ -20,13 +20,18 @@ vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "CursorHoldI", "FocusGai
   pattern = { "*" },
   command = "checktime",
 })
+-- Automatically remove all trailing whitespace before saving
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = { "*" },
+  command = [[%s/\s\+$//e]],
+})
 
 ----------------------------------------
 -- Keybindings
 ----------------------------------------
 -- Space as <Leader> key
 vim.g.mapleader = ' '
--- Copy to clipboard 
+-- Copy to clipboard
 vim.keymap.set({'n', 'x'}, '<C-Insert>', '"+y')
 -- Paste from clipboard (Normal, Visual, Select and Operator-pending mode)
 vim.keymap.set({'n', 'v', 'o'}, '<S-Insert>', '"+p')
@@ -148,6 +153,9 @@ require("lazy").setup(
       keys = {
         { "<leader>e", "<cmd>Neotree reveal_force_cwd<cr>", desc = "Neo-tree(File Explorer)" },
       },
+      opts = {
+        sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      },
     },
     -- Fuzzy Finder
     {
@@ -169,9 +177,9 @@ require("lazy").setup(
         vim.o.timeoutlen = 300
         local wk = require("which-key")
         wk.setup()
-        wk.register({
-          ["<leader>f"] = { name = "+file/find" },
-          ["<leader>g"] = { name = "+LSP menu" },
+        wk.add({
+          { "<leader>f", group = "file/find" },
+          { "<leader>g", group = "LSP menu" },
         })
       end,
     },
@@ -184,7 +192,7 @@ require("lazy").setup(
       end,
     },
     -- Syntax
-    { 
+    {
       'nvim-treesitter/nvim-treesitter',
       config = function()
         require("nvim-treesitter.configs").setup({
