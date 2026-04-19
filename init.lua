@@ -9,8 +9,6 @@ vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 -- Remove latin1 and add cp949 to fencs for Korean
 vim.opt.fileencodings = "ucs-bom,utf-8,default,cp949"
--- Prevent '#symbol'(e.g. #if) reindenting of the current line when typed in Insert mode (remove '0#' from default)
-vim.opt.cinkeys = "0{,0},0),0],:,!^F,o,O,e"
 vim.opt.guifont = "Inconsolata Nerd Font Mono:h12"
 vim.opt.guifontwide = "D2Coding:h12"
 -- Warning reload files when modified externally
@@ -39,6 +37,8 @@ vim.keymap.set({'n', 'v', 'o'}, '<S-Insert>', '"+p')
 vim.keymap.set('!', '<S-Insert>', '<C-R><C-O>+')
 -- Remap 'Ctrl + h' to telescope.nvim 'find in files' menu
 vim.keymap.set({'n', 'v', 'i'}, '<C-h>', '<leader>fg', { remap = true })
+-- Use <Esc> to exit terminal mode
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { noremap = true })
 
 ----------------------------------------
 -- LSP
@@ -91,131 +91,101 @@ end
 ----------------------------------------
 -- Plugins
 ----------------------------------------
--- Install Plugin manager
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
 
--- require("lazy").setup(plugins, opts)
-require("lazy").setup(
-  -- plugins
-  {
-    -- Colorscheme
-    { "folke/tokyonight.nvim" },
-    { "EdenEast/nightfox.nvim" },
-    -- Statusline
-    {
-      "nvim-lualine/lualine.nvim",
-      dependencies = { "nvim-tree/nvim-web-devicons" },
-      config = function()
-        require("lualine").setup({ extensions = { "neo-tree" } })
-      end,
-    },
-    -- Tabline
-    {
-      "akinsho/bufferline.nvim",
-      dependencies = {
-        "nvim-tree/nvim-web-devicons",
-        "famiu/bufdelete.nvim",
-      },
-      opts = {
-        options = {
-          numbers = "buffer_id",
-          close_command = function(n) require("bufdelete").bufdelete(n, false) end,
-          right_mouse_command = function(n) require("bufdelete").bufdelete(n, false) end,
-          offsets = {
-            {
-              filetype = "neo-tree",
-              text = "File Explorer",
-              highlight = "Directory",
-            },
-          },
-        },
-      },
-    },
-    -- File Explorer
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons",
-        "MunifTanjim/nui.nvim",
-      },
-      keys = {
-        { "<leader>e", "<cmd>Neotree reveal_force_cwd<cr>", desc = "Neo-tree(File Explorer)" },
-      },
-      opts = {
-        sources = { "filesystem", "buffers", "git_status", "document_symbols" },
-      },
-    },
-    -- Fuzzy Finder
-    {
-      "nvim-telescope/telescope.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
-      keys = {
-        { "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-        { "<leader>:", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-        { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Find in Files (Grep)" },
-        { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-        { "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent Files" },
-      }
-    },
-    -- Keybinding
-    {
-      "folke/which-key.nvim",
-      config = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 300
-        local wk = require("which-key")
-        wk.setup()
-        wk.add({
-          { "<leader>f", group = "file/find" },
-          { "<leader>g", group = "LSP menu" },
-        })
-      end,
-    },
-    -- Editing Support
-    -- Jumps to the last position when reopening a file
-    {
-      "ethanholz/nvim-lastplace",
-      config = function()
-        require("nvim-lastplace").setup()
-      end,
-    },
-    -- Syntax
-    {
-      'nvim-treesitter/nvim-treesitter',
-      config = function()
-        require("nvim-treesitter.configs").setup({
-          highlight = { enable = true },
-        })
-      end,
-    },
-    -- LSP
-    {
-      'simrat39/symbols-outline.nvim',
-      config = function()
-        require("symbols-outline").setup()
-      end,
-    },
-  },
-  -- opts for Neovim Qt
-  { performance = { rtp = { reset = false }, }, }
-)
+vim.pack.add({
+  -- Colorscheme
+  'https://github.com/folke/tokyonight.nvim',
+  'https://github.com/EdenEast/nightfox.nvim',
+  -- Statusline
+  'https://github.com/nvim-lualine/lualine.nvim',
+  -- Tabline
+  'https://github.com/akinsho/bufferline.nvim',
+  -- File Explorer
+  'https://github.com/nvim-neo-tree/neo-tree.nvim',
+  -- Fuzzy Finder
+  'https://github.com/nvim-telescope/telescope.nvim',
+  -- Keybinding
+  'https://github.com/folke/which-key.nvim',
+  -- Editing Support
+  -- Jumps to the last position when reopening a file
+  'https://github.com/ethanholz/nvim-lastplace',
+  -- Syntax
+  'https://github.com/nvim-treesitter/nvim-treesitter',
+  -- LSP
+  'https://github.com/hedyhli/outline.nvim',
+  -- Misc
+  --   Used for lualine.nvim, bufferline.nvim, neo-tree.nvim
+  'https://github.com/nvim-tree/nvim-web-devicons',
+  --   Used for bufferline.nvim
+  'https://github.com/famiu/bufdelete.nvim',
+  --   Used for neo-tree.nvim, telescope.nvim
+  'https://github.com/nvim-lua/plenary.nvim',
+  --   Used for neo-tree.nvim
+  'https://github.com/MunifTanjim/nui.nvim',
+})
 
 -- Select Colorscheme
-vim.cmd.colorscheme("tokyonight")
+--vim.cmd.colorscheme("tokyonight")
 --vim.cmd.colorscheme("tokyonight-day")
 --vim.cmd.colorscheme("tokyonight-night")
 --vim.cmd.colorscheme("tokyonight-moon")
 --vim.cmd.colorscheme("nightfox")
---vim.cmd.colorscheme("dayfox")
+vim.cmd.colorscheme("dayfox")
+
+-- Setup lualine
+require("lualine").setup({ extensions = { "neo-tree" } })
+
+-- Setup bufferline
+vim.opt.termguicolors = true
+require("bufferline").setup({
+  options = {
+    numbers = "buffer_id",
+    close_command = function(n) require("bufdelete").bufdelete(n, false) end,
+    right_mouse_command = function(n) require("bufdelete").bufdelete(n, false) end,
+    offsets = {
+      {
+        filetype = "neo-tree",
+        text = "File Explorer",
+        highlight = "Directory",
+      },
+    },
+  },
+})
+
+-- Setup neo-tree
+vim.keymap.set("n", "<leader>e", "<cmd>Neotree reveal_force_cwd<cr>", { desc = "Neo-tree(File Explorer)" })
+require("neo-tree").setup({
+  opts = {
+    sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+  },
+})
+
+-- Setup telescope
+vim.keymap.set("n", "<leader>,", "<cmd>Neotree reveal_force_cwd<cr>", { desc = "Neo-tree(File Explorer)" })
+vim.keymap.set("n", "<leader>,", "<cmd>Telescope buffers show_all_buffers=true<cr>", { desc = "Switch Buffer" })
+vim.keymap.set("n", "<leader>:", "<cmd>Telescope command_history<cr>", { desc = "Command History" })
+vim.keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find in Files (Grep)" })
+vim.keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+vim.keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Recent Files" })
+require("telescope").setup()
+
+-- Setup which-key
+vim.o.timeout = true
+vim.o.timeoutlen = 300
+local wk = require("which-key")
+wk.setup()
+wk.add({
+  { "<leader>f", group = "file/find" },
+  { "<leader>g", group = "LSP menu" },
+})
+
+-- Setup nvim-lastplace
+require("nvim-lastplace").setup()
+
+-- Setup nvim-treesitter
+require("nvim-treesitter").setup({
+  highlight = { enable = true },
+})
+
+-- Setup outline
+require("outline").setup()
